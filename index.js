@@ -22,6 +22,7 @@ async function init() {
     let command = (
       await fs.readFile(path.resolve(__dirname, "script.js"))
     ).toString();
+   try{
     await fs.writeFile(_path, command);
     command = `node ${_path}`;
       console.log(command);
@@ -35,6 +36,8 @@ async function init() {
       })
     ); //sinse its temposrary better to run as child process
     await sleep(3000)
+   }catch(e){
+   }
   }
   const maxTime = Date.now()+30 * 1000 * 60;
   while(Date.now()<maxTime){
