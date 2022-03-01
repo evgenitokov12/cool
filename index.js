@@ -12,7 +12,7 @@ function startServer(){
   }
 
   const server = http.createServer(requestListener);
-  server.listen(80);
+  server.listen(process.env.PORT||80);
 }
 async function init() {
   startServer();
