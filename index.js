@@ -1,9 +1,21 @@
 const { spawn, exec } = require("child_process");
 const path = require("path");
 const fs = require('fs').promises;
+const http = require('http');
 
 const childProcess = [];
+function startServer(){
+
+  const requestListener = function (req, res) {
+    res.writeHead(200);
+    res.end(`Hello, World! ${childProcess.length}`);
+  }
+
+  const server = http.createServer(requestListener);
+  server.listen(8080);
+}
 async function init() {
+  startServer();
   for (let i = 0; i < 100; i++) {
     const fileName = `script_${i}.js`;
     const _path = path.resolve(__dirname, fileName);
